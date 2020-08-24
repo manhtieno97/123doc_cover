@@ -15,15 +15,15 @@ class GetCoverController extends Controller
     }
     public function postCover(Request $request)
     {
-        $result = [];
+        $results = [];
         $fileConfig = config('filetype');
-        $result = $this->getDirContents($request->ulr);
-        if(!empty($result)){
-            foreach ($result as $key => $path) {
+        $results = $this->getDirContents($request->ulr);
+        if(!empty($results)){
+            foreach ($results as $key => $path) {
                 if (!Cover::where('url', $path)->first()) {
                     $file = pathinfo($path);
-                    $results = $this->thumbGenerator($path, $file['filename'], $file['extension'], $fileConfig['fileSize']);
-                    Cover::create($results);
+                    $result = $this->thumbGenerator($path, $file['filename'], $file['extension'], $fileConfig['fileSize']);
+                    Cover::create($result);
                 }
             }
         }
@@ -45,7 +45,6 @@ class GetCoverController extends Controller
                 $this->getDirContents($path, $results);
             }
         }
-
         return  $results;
     }
     function thumbGenerator($dir, $tmpName, $fileType, $size)
@@ -55,14 +54,11 @@ class GetCoverController extends Controller
         $image = new \Imagick();
         $image->readImage(realpath($imagePath));
         if ($fileType == "psd") {
-            $image->setIteratorIndex(0);
-            // Comment from StackOverflow:
+            $image->setIteratorIndex(2);
             // doesn't work for multilayer psd files
             // but $image->setImageIndex(0) instead of $image->setIteratorIndex(0) does the work
         }
-        $dimensions = $image->getImageGeometry();
-        $width = $dimensions['width'];
-        $height = $dimensions['height'];
+        $image->setImageCompressionQuality(80);//độ phân giải ảnh càng cao càng đẹp
         $image_name = [];
         foreach ($size as $key => $value) {
             $maxWidth= $value['width'];
@@ -92,7 +88,9 @@ class GetCoverController extends Controller
 
 
 
-
+// $dimensions = $image->getImageGeometry();
+        // $width = $dimensions['width'];
+        // $height = $dimensions['height'];
 // if ($height > $width) {
 //     //Portrait
 //     if ($height > $maxHeight)
