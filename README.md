@@ -1,3 +1,49 @@
+# Bài tập Get Cover
+
+## Tìm hiểu về Get Cover.
+
+ Đầu vào là đường dẫn folder quét tất cả folder con, lấy cover tất cả các file psd, tif,jpeg lớn.
+
+Thực hiện bởi [Nguyễn Mạnh Tiến](https://github.com/manhtieno97)
+
+## Liên kết
+
+- Liên kết đề bài :https://www.php.net/manual/en/book.imagick.php
+- Liên kết học liệu :https://gist.github.com/ivanhoe011/4115733bd21ec988b1f6
+
+## Hướng dẫn cài đặt test/sử dụng nếu có
+
+**Cài đặt magick**:https://www.elastic.co/downloads/elasticsearch
+
+**KIểm tra cài đặt**:http://localhost:9200/
+
+**Cài composer và chạy**: composer require elasticsearch/elasticsearch
+
+## Kiến thức nắm được
+
+ - Elaticsearch là một công cụ phân tích và tìm kiếm.
+
+ - Elasticearch tìm kiếm bởi inverted index(đánh index theo keyword).
+ 
+ - Document là đơn vị tìm kiếm và đánh index. Một index có thể bao gồm một hay nhiều Document, và một Document có thể chứa một hay nhiều Fields.
+
+ - Mapping là quá trình định nghĩa làm thế nào một document và các fields của nó được lưu trữ và đánh index
+
+
+## Todo
+
+Sử dụng elasticsearch thay cho các tìm kiếm bằng truy vấn thông thường
+
+## Credit
+
+- https://github.com/manhtieno97/Laravel_elasticsearch
+
+- https://viblo.asia/p/gioi-thieu-package-laravel-generator-Eb85oMRkZ2G
+
+
+
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
