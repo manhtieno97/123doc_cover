@@ -16,39 +16,38 @@ Thực hiện bởi [Nguyễn Mạnh Tiến](https://github.com/manhtieno97)
 **Cài đặt magick**:https://mlocati.github.io/articles/php-windows-imagick.html
 
 **Hướng dẫn hoạt động**: Vào config\filetype :
-    <?php return [
+
     'fileType' => [
          'psd', 'tif', 'jpeg', 
     ],
+    
+"fileType" là mảng chứa các loại file cần cover. 
+    
     'fileSize' => [
         'lagger' => [
             'width' => 720,
             'height' => 720,
             'url' => 'C:\VPN\fontend\image\lagger',
         ]],
-    ];
-    ?>
+        
+- "fileSize" là mảng chứa kích thước ảnh cover và đường dẫn lưu ảnh cover. 
 
 ## Kiến thức nắm được
 
- - Elaticsearch là một công cụ phân tích và tìm kiếm.
-
- - Elasticearch tìm kiếm bởi inverted index(đánh index theo keyword).
+ - Biết thêm về magick và cách sử dụng, một số function của nó.
  
- - Document là đơn vị tìm kiếm và đánh index. Một index có thể bao gồm một hay nhiều Document, và một Document có thể chứa một hay nhiều Fields.
-
- - Mapping là quá trình định nghĩa làm thế nào một document và các fields của nó được lưu trữ và đánh index
+ - Hiểu thêm về cách lấy các folder
 
 
 ## Todo
 
-Sử dụng elasticsearch thay cho các tìm kiếm bằng truy vấn thông thường
+Sử dụng để convert các file thành hình ảnh để hiển thị cho người dùng nhận biết.
 
 ## Credit
 
-- https://github.com/manhtieno97/Laravel_elasticsearch
+- https://github.com/manhtieno97/123doc_cover
 
-- https://viblo.asia/p/gioi-thieu-package-laravel-generator-Eb85oMRkZ2G
+- https://www.php.net/manual/en/book.imagick.php
 
 
 
