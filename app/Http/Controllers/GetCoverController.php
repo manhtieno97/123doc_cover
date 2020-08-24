@@ -6,6 +6,8 @@ use Owenoj\LaravelGetId3\GetId3;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Request;
 use App\Cover;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 class GetCoverController extends Controller
 {
     const saveFileType='jpg';
@@ -58,24 +60,26 @@ class GetCoverController extends Controller
         $saveFileType = self::saveFileType;
         $imagePath = $dir ;
         $image = new \Imagick();
-        $image->readImage(realpath($imagePath));
         if ($fileType == "psd") {
-            $image->setIteratorIndex(0);
-            // doesn't work for multilayer psd files
-            // but $image->setImageIndex(0) instead of $image->setIteratorIndex(0) does the work
+            // $image->setIteratorIndex(0);
+            $imagePath= $imagePath. '[0]';
         }
+        $image->readImage($imagePath);
         $image->setImageCompressionQuality(80);//độ phân giải ảnh càng cao càng đẹp
-        
         foreach ($size as $key => $value) {
-            $maxWidth= $value['width'];
+            $maxWidth = $value['width'];
             $maxHeight= $value['height'];
             $url= $value['url'];
-
-            $image->thumbnailImage($maxWidth, $maxHeight);//
-            $image->writeImage($url . "/" . $tmpName . ".". $saveFileType);
+            $image->thumbnailImage($maxWidth, $maxHeight); //
+            $image->setImageFormat("jpeg");
+            //$image->writeImage($url . "/" . $tmpName . ".". $saveFileType);
+            Storage::disk('local')->put($url . "/" . $tmpName . "." . $saveFileType, $image->getImageBlob());
         }
+        // Storage::disk('local')->putFile('images', $file);
+        $image->clear();
+        $image->destroy();
         $image_name = [];
-        $image_name['url'] = $imagePath;
+        $image_name['url'] = $dir;
         $image_name['image_cover'] = $tmpName;
         return $image_name;
     }
