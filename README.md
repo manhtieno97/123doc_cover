@@ -43,7 +43,7 @@ Thực hiện bởi [Nguyễn Mạnh Tiến](https://github.com/manhtieno97)
 - "fileSize" là mảng chứa kích thước ảnh cover và đường dẫn lưu ảnh cover. 
 
 
-- **Hoặc** vào .env 
+- **Hoặc** vào .env để cấu hình
     
       FILE_TYPE_COVER=psd,tif,jpeg
       IMAGE_COVER_WIDTH_MD=500
