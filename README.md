@@ -16,8 +16,7 @@ Thực hiện bởi [Nguyễn Mạnh Tiến](https://github.com/manhtieno97)
 **Cài đặt magick**:https://mlocati.github.io/articles/php-windows-imagick.html
 
 **Hướng dẫn hoạt động**: Vào config\filetype :
-    <?php
-    return [
+    <?php return [
     'fileType' => [
          'psd', 'tif', 'jpeg', 
     ],
@@ -26,9 +25,7 @@ Thực hiện bởi [Nguyễn Mạnh Tiến](https://github.com/manhtieno97)
             'width' => 720,
             'height' => 720,
             'url' => 'C:\VPN\fontend\image\lagger',
-        ],
-
-        ],
+        ]],
     ];
     ?>
 
