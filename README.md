@@ -13,11 +13,24 @@ Thực hiện bởi [Nguyễn Mạnh Tiến](https://github.com/manhtieno97)
 
 ## Hướng dẫn cài đặt test/sử dụng nếu có
 
-**Cài đặt magick**:https://www.elastic.co/downloads/elasticsearch
+**Cài đặt magick**:https://mlocati.github.io/articles/php-windows-imagick.html
 
-**KIểm tra cài đặt**:http://localhost:9200/
+**Hướng dẫn hoạt động**: Vào config\filetype :
+    <?php
+    return [
+    'fileType' => [
+         'psd', 'tif', 'jpeg', 
+    ],
+    'fileSize' => [
+        'lagger' => [
+            'width' => 720,
+            'height' => 720,
+            'url' => 'C:\VPN\fontend\image\lagger',
+        ],
 
-**Cài composer và chạy**: composer require elasticsearch/elasticsearch
+        ],
+    ];
+    ?>
 
 ## Kiến thức nắm được
 
