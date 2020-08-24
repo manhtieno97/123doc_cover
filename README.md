@@ -48,7 +48,7 @@ Thực hiện bởi [Nguyễn Mạnh Tiến](https://github.com/manhtieno97)
       FILE_TYPE_COVER=psd,tif,jpeg
       IMAGE_COVER_WIDTH_MD=500
       IMAGE_COVER_HEIGHT_MD=500
-      IMAGE_COVER_URL_MD=image/medium
+      IMAGE_COVER_URL_MD=images/medium
 
 
 ## Kiến thức nắm được
