@@ -26,8 +26,14 @@ class GetCoverController extends Controller
                 foreach ($results as $key => $path) {
                     if (!Cover::where('url', $path)->first()) {
                         $file = pathinfo($path);
-                        $result = $this->thumbGenerator($path, $file['filename'], $file['extension'], $fileConfig['fileSize']);
-                        Cover::create($result);
+                        try {
+                            $result = $this->thumbGenerator($path, $file['filename'], $file['extension'], $fileConfig['fileSize']);
+                        } catch (\Exception $e) {
+                            $result = [];
+                        }
+                        if (!empty($result)) {
+                            Cover::create($result);
+                        }
                     }
                 }
             }
@@ -57,31 +63,48 @@ class GetCoverController extends Controller
     }
     function thumbGenerator($dir, $tmpName, $fileType, $size)
     {
+        $image_name = [];
         $saveFileType = self::saveFileType;
         $imagePath = $dir ;
         $image = new \Imagick();
-        if ($fileType == "psd") {
-            // $image->setIteratorIndex(0);
-            $imagePath= $imagePath. '[0]';
+        
+        switch ($fileType) {
+            case 'psd':
+                $imagePath = $imagePath . '[0]'; //lấy layout đầu tiên
+                $image->readImage($imagePath);
+                break;
+            case 'cdr':
+                //$image->readImage($imagePath);
+                $cdr = file_get_contents($imagePath);
+                $image->pingImageBlob($cdr);
+                $image->setImageFormat("jpeg");
+                
+                break;  
+            case 'pdf':
+                $imagePath = $imagePath . '[0]'; //lấy layout đầu tiên
+                $image->readImage($imagePath);
+                break;  
+            default:
+                $image->readImage($imagePath);
+                break;
         }
-        $image->readImage($imagePath);
-        $image->setImageCompressionQuality(80);//độ phân giải ảnh càng cao càng đẹp
+        $image->setImageCompressionQuality(90); //độ phân giải ảnh càng cao càng đẹp
         foreach ($size as $key => $value) {
             $maxWidth = $value['width'];
-            $maxHeight= $value['height'];
-            $url= $value['url'];
+            $maxHeight = $value['height'];
+            $url = $value['url'];
             $image->thumbnailImage($maxWidth, $maxHeight); //
             $image->setImageFormat("jpeg");
-            //$image->writeImage($url . "/" . $tmpName . ".". $saveFileType);
             Storage::disk('local')->put($url . "/" . $tmpName . "." . $saveFileType, $image->getImageBlob());
         }
-        // Storage::disk('local')->putFile('images', $file);
         $image->clear();
         $image->destroy();
-        $image_name = [];
+
         $image_name['url'] = $dir;
         $image_name['image_cover'] = $tmpName;
         return $image_name;
+        
+        
     }
 
 
