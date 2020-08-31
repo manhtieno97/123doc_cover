@@ -18,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/','GetCoverController@index')->name('getform');
 Route::post('/','GetCoverController@postCover')->name('postCover');
+Route::get('detail/{id}', 'GetCoverController@detail')->name('detail');
+
+Route::get('/image', 'ImagickController@index')->name('getFormImage');
+Route::post('/image', 'ImagickController@postImage')->name('postImage');
+Route::get('/image/detail/{id}', 'ImagickController@detailImage')->name('detailImage');
